@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nitish Arora — Site Supervisor &amp; Junior Project Manager</title>
+<meta name="description" content="Portfolio of Nitish Arora, Site Supervisor and Junior Project Manager specialising in premium residential builds across Sydney, NSW.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0d10;
+  --bg-soft:#111418;
+  --card:#15181d;
+  --line:rgba(255,255,255,0.08);
+  --text:#eef0f3;
+  --muted:#8b9199;
+  --accent:#f2a33b;
+  --accent-2:#ff6b45;
+  --radius:16px;
+  --maxw:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:600;letter-spacing:-0.01em;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+section{position:relative;padding:120px 0;}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12.5px;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--accent);font-weight:600;margin-bottom:16px;
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--accent);}
+.section-title{font-size:clamp(28px,4vw,42px);margin-bottom:16px;}
+.section-lede{color:var(--muted);max-width:620px;font-size:16px;margin-bottom:56px;}
+
+/* reveal animation */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);}
+.reveal.in{opacity:1;transform:translateY(0);}
+.reveal-stagger > *{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.reveal-stagger.in > *{opacity:1;transform:translateY(0);}
+.reveal-stagger.in > *:nth-child(1){transition-delay:.05s}
+.reveal-stagger.in > *:nth-child(2){transition-delay:.12s}
+.reveal-stagger.in > *:nth-child(3){transition-delay:.19s}
+.reveal-stagger.in > *:nth-child(4){transition-delay:.26s}
+.reveal-stagger.in > *:nth-child(5){transition-delay:.33s}
+
+/* nav */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(11,13,16,0.7);
+  backdrop-filter:blur(14px) saturate(140%);
+  border-bottom:1px solid transparent;
+  transition:border-color .3s ease, background .3s ease;
+}
+header.scrolled{border-bottom-color:var(--line);}
+nav{max-width:var(--maxw);margin:0 auto;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Space Grotesk';font-weight:700;font-size:18px;letter-spacing:0.01em;}
+.logo span{color:var(--accent);}
+.nav-links{display:flex;gap:34px;list-style:none;}
+.nav-links a{font-size:14px;color:var(--muted);font-weight:500;position:relative;padding:4px 0;transition:color .25s ease;}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--accent);transition:width .3s ease;}
+.nav-links a:hover, .nav-links a.active{color:var(--text);}
+.nav-links a.active::after, .nav-links a:hover::after{width:100%;}
+.nav-cta{
+  border:1px solid var(--line);padding:9px 18px;border-radius:999px;font-size:13px;font-weight:600;
+  transition:border-color .25s ease, background .25s ease, transform .25s ease;
+}
+.nav-cta:hover{border-color:var(--accent);background:rgba(242,163,59,0.08);transform:translateY(-1px);}
+.menu-btn{display:none;background:none;border:0;color:var(--text);font-size:22px;cursor:pointer;}
+
+/* hero */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding-top:120px;position:relative;overflow:hidden;
+}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:0.35;pointer-events:none;}
+.blob-1{width:520px;height:520px;background:radial-gradient(circle,var(--accent),transparent 70%);top:-160px;right:-120px;animation:float1 16s ease-in-out infinite;}
+.blob-2{width:420px;height:420px;background:radial-gradient(circle,var(--accent-2),transparent 70%);bottom:-140px;left:-100px;animation:float2 20s ease-in-out infinite;}
+@keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(-40px,50px)}}
+@keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(50px,-30px)}}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 60% 50% at 50% 30%,black 10%,transparent 75%);
+  opacity:.5;
+}
+.hero-inner{position:relative;z-index:2;}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);
+  border:1px solid var(--line);padding:7px 14px;border-radius:999px;margin-bottom:28px;
+}
+.hero-tag .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(242,163,59,0.18);}
+.hero h1{font-size:clamp(40px,7vw,84px);line-height:1.02;letter-spacing:-0.02em;margin-bottom:22px;}
+.hero h1 .line{display:block;overflow:hidden;}
+.hero h1 .line span{display:inline-block;transform:translateY(110%);animation:lineUp .9s cubic-bezier(.2,.8,.2,1) forwards;}
+.hero h1 .line:nth-child(1) span{animation-delay:.1s}
+.hero h1 .line:nth-child(2) span{animation-delay:.22s;color:var(--accent);}
+@keyframes lineUp{to{transform:translateY(0)}}
+.hero p.sub{max-width:560px;color:var(--muted);font-size:18px;margin-bottom:38px;}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:70px;}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;font-weight:600;font-size:14.5px;
+  transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#151005;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px -10px rgba(242,163,59,0.55);}
+.btn-ghost{border:1px solid var(--line);color:var(--text);}
+.btn-ghost:hover{border-color:var(--accent);transform:translateY(-2px);}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);padding-top:34px;}
+.stat{padding-right:20px;}
+.stat b{display:block;font-family:'Space Grotesk';font-size:clamp(24px,3vw,34px);color:var(--text);}
+.stat b .suffix{color:var(--accent);}
+.stat span{color:var(--muted);font-size:13px;}
+
+/* about */
+.about-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:70px;align-items:start;}
+.about-grid p{color:var(--muted);font-size:16.5px;margin-bottom:18px;}
+.about-grid p strong{color:var(--text);font-weight:600;}
+.info-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px;}
+.info-row{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line);font-size:14.5px;}
+.info-row:last-child{border-bottom:0;}
+.info-row span:first-child{color:var(--muted);}
+.info-row span:last-child{font-weight:600;text-align:right;}
+
+/* competencies */
+.comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.comp-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px;
+  transition:transform .35s ease, border-color .35s ease, background .35s ease;
+}
+.comp-card:hover{transform:translateY(-6px);border-color:rgba(242,163,59,0.4);background:#181b21;}
+.comp-num{font-family:'Space Grotesk';color:var(--accent);font-size:13px;font-weight:600;margin-bottom:16px;}
+.comp-card h3{font-size:18px;margin-bottom:10px;}
+.comp-card p{color:var(--muted);font-size:14.5px;}
+
+/* experience */
+.timeline{border-left:1px solid var(--line);padding-left:36px;position:relative;}
+.tl-item{position:relative;padding-bottom:8px;}
+.tl-item::before{content:"";position:absolute;left:-42px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--accent);}
+.tl-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin-bottom:6px;align-items:baseline;}
+.tl-head h3{font-size:22px;}
+.tl-head .role{color:var(--accent);font-weight:600;font-size:15px;}
+.tl-meta{color:var(--muted);font-size:13.5px;margin-bottom:20px;}
+.tl-list{list-style:none;display:grid;gap:13px;}
+.tl-list li{position:relative;padding-left:22px;color:var(--muted);font-size:15px;}
+.tl-list li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;background:var(--accent);border-radius:1px;transform:rotate(45deg);}
+.tl-list li strong{color:var(--text);font-weight:600;}
+
+/* education */
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.edu-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px;}
+.edu-card h3{font-size:18px;margin-bottom:6px;}
+.edu-card .school{color:var(--accent);font-size:14px;font-weight:600;margin-bottom:4px;}
+.edu-card .when{color:var(--muted);font-size:13px;}
+
+/* projects */
+.project{
+  border-top:1px solid var(--line);
+  padding:64px 0;
+  display:grid;grid-template-columns:0.85fr 1.15fr;gap:56px;align-items:center;
+}
+.project:last-child{padding-bottom:0;}
+.project.reverse{grid-template-columns:1.15fr 0.85fr;}
+.project.reverse .p-info{order:2;}
+.project.reverse .p-gallery{order:1;}
+.p-index{font-family:'Space Grotesk';color:var(--accent);font-size:14px;font-weight:600;margin-bottom:14px;}
+.p-info h3{font-size:26px;margin-bottom:8px;}
+.p-info .loc{color:var(--muted);font-size:14px;margin-bottom:18px;}
+.p-info p{color:var(--muted);font-size:15px;margin-bottom:22px;}
+.p-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.p-tag{border:1px solid var(--line);color:var(--muted);font-size:12px;padding:6px 12px;border-radius:999px;}
+.p-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.p-gallery .g-item{
+  position:relative;border-radius:12px;overflow:hidden;cursor:pointer;
+  border:1px solid var(--line);aspect-ratio:4/3;background:#0e0f0f;
+}
+.p-gallery .g-item.big{grid-column:span 2;aspect-ratio:16/9;}
+.p-gallery img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+.p-gallery .g-item:hover img{transform:scale(1.07);}
+.g-cap{
+  position:absolute;left:0;right:0;bottom:0;padding:10px 12px;font-size:11.5px;color:#fff;
+  background:linear-gradient(0deg,rgba(0,0,0,0.65),transparent);
+  display:flex;align-items:center;gap:6px;
+}
+
+/* lightbox */
+.lightbox{position:fixed;inset:0;background:rgba(6,7,9,0.94);z-index:200;display:none;align-items:center;justify-content:center;padding:40px;}
+.lightbox.open{display:flex;}
+.lightbox img{max-width:min(92vw,1100px);max-height:82vh;object-fit:contain;border-radius:10px;}
+.lb-close,.lb-prev,.lb-next{
+  position:absolute;background:rgba(255,255,255,0.08);border:1px solid var(--line);color:#fff;
+  width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;
+  transition:background .2s ease;
+}
+.lb-close:hover,.lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,0.16);}
+.lb-close{top:26px;right:26px;}
+.lb-prev{left:26px;top:50%;transform:translateY(-50%);}
+.lb-next{right:26px;top:50%;transform:translateY(-50%);}
+.lb-cap{position:absolute;bottom:28px;left:0;right:0;text-align:center;color:var(--muted);font-size:13px;}
+
+/* contact */
+.contact{text-align:center;}
+.contact .section-lede{margin-left:auto;margin-right:auto;}
+.contact-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:8px;}
+footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;color:var(--muted);font-size:13px;}
+footer b{color:var(--text);}
+
+@media(max-width:900px){
+  .about-grid,.project,.project.reverse{grid-template-columns:1fr;gap:34px;}
+  .project.reverse .p-info,.project.reverse .p-gallery{order:0;}
+  .comp-grid{grid-template-columns:1fr 1fr;}
+  .edu-grid{grid-template-columns:1fr;}
+  .stats{grid-template-columns:1fr 1fr;row-gap:24px;}
+  .nav-links{display:none;}
+  .menu-btn{display:block;}
+  .nav-cta{display:none;}
+}
+@media(max-width:560px){
+  .comp-grid{grid-template-columns:1fr;}
+  section{padding:80px 0;}
+  .p-gallery{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <nav>
+    <a href="#top" class="logo">Nitish<span>Arora</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+    <button class="menu-btn" id="menuBtn">&#9776;</button>
+  </nav>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="hero-grid"></div>
+    <div class="wrap hero-inner">
+      <div class="hero-tag"><span class="dot"></span> Available for Remedial Supervisor &amp; Junior PM roles &middot; Sydney, NSW</div>
+      <h1>
+        <span class="line"><span>Building sites,</span></span>
+        <span class="line"><span>run right.</span></span>
+      </h1>
+      <p class="sub">Site Supervisor &amp; qualified Carpenter delivering premium residential new builds across Sydney — from framing to flawless client handover.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View Projects &rarr;</a>
+        <a href="#contact" class="btn btn-ghost">Contact Me</a>
+      </div>
+      <div class="stats reveal-stagger">
+        <div class="stat"><b>5<span class="suffix">+</span></b><span>Premium residential builds</span></div>
+        <div class="stat"><b>1,800<span class="suffix">m²</span></b><span>Living area supervised</span></div>
+        <div class="stat"><b>3<span class="suffix">yrs</span></b><span>Site supervision &amp; junior PM</span></div>
+        <div class="stat"><b>2<span class="suffix">/2</span></b><span>Diploma + Certificate III</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="reveal">
+        <div class="eyebrow">About</div>
+        <h2 class="section-title">From the tools to the trailer.</h2>
+        <p>Highly dedicated <strong>Site Supervisor</strong> and qualified <strong>Carpenter</strong> with a proven track record delivering high-quality residential new builds across Sydney. Expert in managing day-to-day site operations, strictly enforcing WHS protocols, scheduling trades, and running rigorous quality control and defect remediation.</p>
+        <p>Transitioning seamlessly from hands-on carpentry to site management, I bridge the gap between technical execution and project delivery — now looking to bring my expertise in defect resolution, structural diagnostics, and client handover to a <strong>Remedial Site Supervisor</strong> or <strong>Junior Project Manager</strong> role.</p>
+      </div>
+      <div class="info-card reveal">
+        <div class="info-row"><span>Location</span><span>Riverstone 2765, NSW</span></div>
+        <div class="info-row"><span>Phone</span><span>0498 070 260</span></div>
+        <div class="info-row"><span>Email</span><span>aroranitish@outlook.com.au</span></div>
+        <div class="info-row"><span>Current role</span><span>Site Supervisor / Jr. PM</span></div>
+        <div class="info-row"><span>Employer</span><span>Sydney Developers Pty Ltd</span></div>
+        <div class="info-row"><span>Since</span><span>April 2023</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow">Core Competencies</div>
+        <h2 class="section-title">What I bring to a site.</h2>
+        <p class="section-lede">Five years of on-tools experience turned into disciplined, end-to-end site leadership.</p>
+      </div>
+      <div class="comp-grid reveal-stagger">
+        <div class="comp-card">
+          <div class="comp-num">01</div>
+          <h3>Site Management &amp; Junior PM</h3>
+          <p>End-to-end site supervision, daily lockups, material scheduling, and delivery coordination.</p>
+        </div>
+        <div class="comp-card">
+          <div class="comp-num">02</div>
+          <h3>Quality Assurance &amp; Remedial Work</h3>
+          <p>Defect identification, pending works completion, touch-up management, and strict quality control.</p>
+        </div>
+        <div class="comp-card">
+          <div class="comp-num">03</div>
+          <h3>WHS Compliance</h3>
+          <p>Daily site sign-ins, safety walkthroughs, and hazard mitigation across every stage of the build.</p>
+        </div>
+        <div class="comp-card">
+          <div class="comp-num">04</div>
+          <h3>Stakeholder Communication</h3>
+          <p>Client walkthroughs, selection finalisation, and builder / architect liaison.</p>
+        </div>
+        <div class="comp-card">
+          <div class="comp-num">05</div>
+          <h3>Trade Coordination</h3>
+          <p>Subcontractor management, task delegation, and progress tracking against critical path.</p>
+        </div>
+        <div class="comp-card">
+          <div class="comp-num">06</div>
+          <h3>Structural Diagnostics</h3>
+          <p>Framing, structural steel, waffle-pod slabs and drop-edge beams — read plans, catch issues early.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow">Experience</div>
+        <h2 class="section-title">On site, every day.</h2>
+      </div>
+      <div class="timeline reveal">
+        <div class="tl-item">
+          <div class="tl-head">
+            <h3>Sydney Developers Pty Ltd</h3>
+            <span class="role">Site Supervisor / Junior Project Manager</span>
+          </div>
+          <div class="tl-meta">Sydney, NSW &middot; April 2023 — Present</div>
+          <ul class="tl-list">
+            <li><strong>Directed daily operations</strong> across multiple premium residential builds, overseeing trade scheduling, material procurement, and critical path timelines.</li>
+            <li><strong>Ran daily morning site briefings</strong> to confirm sign-ins, communicate tasks, and enforce strict WHS protocols.</li>
+            <li><strong>Led client &amp; builder walkthroughs</strong> to finalise selections, manage expectations, and keep decisions on schedule.</li>
+            <li><strong>Owned quality control</strong> — personally overseeing finishing touch-ups, identifying defects, and managing remedial works for flawless handovers.</li>
+            <li><strong>Managed site lockups and deliveries</strong>, keeping construction sites secure, organised, and efficient.</li>
+            <li><strong>Optimised cost &amp; resourcing</strong> to increase overall project profitability.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow">Portfolio</div>
+        <h2 class="section-title">Recent builds I've supervised.</h2>
+        <p class="section-lede">A selection of high-end residential projects across Box Hill and Gables, NSW — spanning site coordination, structural finishes, and full floor-plan execution.</p>
+      </div>
+      <div id="projectList"></div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow">Education</div>
+        <h2 class="section-title">Trained on the tools first.</h2>
+      </div>
+      <div class="edu-grid reveal-stagger">
+        <div class="edu-card">
+          <h3>Diploma in Building &amp; Construction</h3>
+          <div class="school">Lead College — Parramatta Campus</div>
+          <div class="when">August 2021 — February 2023</div>
+        </div>
+        <div class="edu-card">
+          <h3>Certificate III in Carpentry</h3>
+          <div class="school">Macallan College — Sydney Campus</div>
+          <div class="when">July 2019 — August 2021</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow" style="justify-content:center">Contact</div>
+        <h2 class="section-title">Let's talk about your next site.</h2>
+        <p class="section-lede">Open to Remedial Site Supervisor and Junior Project Manager roles across Sydney.</p>
+        <div class="contact-actions">
+          <a href="mailto:aroranitish@outlook.com.au" class="btn btn-primary">Email Me &rarr;</a>
+          <a href="tel:0498070260" class="btn btn-ghost">Call 0498 070 260</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap"><b>Nitish Arora</b> — Site Supervisor &amp; Junior Project Manager &middot; Riverstone, NSW &middot; &copy; <span id="year"></span></div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <div class="lb-close" id="lbClose">&times;</div>
+  <div class="lb-prev" id="lbPrev">&larr;</div>
+  <img id="lbImg" src="" alt="">
+  <div class="lb-next" id="lbNext">&rarr;</div>
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ---- project data ---- */
+const projects = [
+  {
+    title: "Detached Dual Occupancy",
+    loc: "Lot 124 Shetland Street, Box Hill NSW",
+    desc: "Complete site supervision of a premium detached dual-occupancy build on a 626.1 m² lot. Managed parallel construction schedules, dual material deliveries, and integrated stormwater/sediment control across the entire site.",
+    tags: ["626.1 m² lot", "Dual occupancy", "Face brick + render", "Colorbond roof"],
+    images: [
+      {src:"images/p1-render-a.jpg", cap:"Exterior render — front elevation"},
+      {src:"images/p1-render-b.jpg", cap:"Exterior render — garage elevation"},
+      {src:"images/p1-floor-ground.jpg", cap:"Ground floor plan"},
+      {src:"images/p1-floor-first.jpg", cap:"First floor plan"}
+    ]
+  },
+  {
+    title: "Double Storey Dwelling",
+    loc: "11 Bluegate Street, Box Hill NSW",
+    desc: "Supervised the end-to-end construction of a luxury 5-bedroom, 3-bathroom double-storey residence spanning 287.49 m², coordinating matrix cladding, rendered brick piers, and a sliding stacker door system.",
+    tags: ["287.49 m²", "5 bed / 3 bath", "Matrix cladding", "Stacker doors"],
+    images: [
+      {src:"images/p2-render.jpg", cap:"Exterior render"},
+      {src:"images/p2-floor-ground.jpg", cap:"Ground floor plan"},
+      {src:"images/p2-floor-first.jpg", cap:"First floor plan"}
+    ]
+  },
+  {
+    title: "Premium Double Storey Build",
+    loc: "Lot 2634 Basalt Street (192 Mustang Ave), Gables NSW",
+    desc: "Oversaw structural execution and quality control of a 378 m² luxury residence — complex framing, structural steel for cantilevered balconies, and an articulated facade of stacked stone, rendered brick and Western Myall.",
+    tags: ["378 m² GFA", "Structural steel", "Cantilevered balconies", "Stacked stone facade"],
+    images: [
+      {src:"images/p3-render.jpg", cap:"Exterior render"},
+      {src:"images/p3-floor-ground.jpg", cap:"Ground floor plan"},
+      {src:"images/p3-floor-first.jpg", cap:"First floor plan"}
+    ]
+  },
+  {
+    title: "Executive Residence",
+    loc: "15 Newfoundland Way, Box Hill NSW",
+    desc: "Directed the build of a 224.53 m² GFA double-storey dwelling on a 300 m² block. Managed strict zero-lot boundary conditions, intricate drop-edge beams, and WHS protocols through critical excavation and framing.",
+    tags: ["224.53 m² GFA", "300 m² block", "Zero-lot boundary", "Drop-edge beams"],
+    images: [
+      {src:"images/p4-render.jpg", cap:"Exterior render"},
+      {src:"images/p4-floor-ground.jpg", cap:"Ground floor plan"},
+      {src:"images/p4-floor-first.jpg", cap:"First floor plan"}
+    ]
+  },
+  {
+    title: "Double Storey Dwelling",
+    loc: "8 Henson Way, Box Hill NSW",
+    desc: "Supervised the complete build of a premium 5-bedroom, 3-bathroom double-storey residence on a 303.2 m² block — waffle-pod slab pouring, structural steel beam placement, and external brick veneer with rendered finishes.",
+    tags: ["303.2 m² block", "5 bed / 3 bath", "Waffle-pod slab", "Brick veneer"],
+    images: [
+      {src:"images/p5-render.jpg", cap:"Exterior render"},
+      {src:"images/p5-floor-ground.jpg", cap:"Ground floor plan"},
+      {src:"images/p5-floor-first.jpg", cap:"First floor plan"}
+    ]
+  }
+];
+
+const list = document.getElementById('projectList');
+let flatImages = []; // {src, cap} across all projects, in order
+
+projects.forEach((p, i) => {
+  const el = document.createElement('div');
+  el.className = 'project reveal' + (i % 2 === 1 ? ' reverse' : '');
+  const galleryItems = p.images.map((img, j) => {
+    const globalIdx = flatImages.length;
+    flatImages.push(img);
+    const big = j === 0 ? ' big' : '';
+    return `<div class="g-item${big}" data-idx="${globalIdx}">
+      <img src="${img.src}" alt="${img.cap}" loading="lazy">
+      <div class="g-cap">${img.cap}</div>
+    </div>`;
+  }).join('');
+  el.innerHTML = `
+    <div class="p-info">
+      <div class="p-index">0${i + 1} / 0${projects.length}</div>
+      <h3>${p.title}</h3>
+      <div class="loc">${p.loc}</div>
+      <p>${p.desc}</p>
+      <div class="p-tags">${p.tags.map(t => `<span class="p-tag">${t}</span>`).join('')}</div>
+    </div>
+    <div class="p-gallery">${galleryItems}</div>
+  `;
+  list.appendChild(el);
+});
+
+/* ---- lightbox ---- */
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+let currentIdx = 0;
+
+function openLightbox(idx){
+  currentIdx = idx;
+  updateLightbox();
+  lightbox.classList.add('open');
+}
+function updateLightbox(){
+  const img = flatImages[currentIdx];
+  lbImg.src = img.src;
+  lbImg.alt = img.cap;
+  lbCap.textContent = img.cap;
+}
+document.querySelectorAll('.g-item').forEach(item => {
+  item.addEventListener('click', () => openLightbox(parseInt(item.dataset.idx, 10)));
+});
+document.getElementById('lbClose').addEventListener('click', () => lightbox.classList.remove('open'));
+document.getElementById('lbPrev').addEventListener('click', () => { currentIdx = (currentIdx - 1 + flatImages.length) % flatImages.length; updateLightbox(); });
+document.getElementById('lbNext').addEventListener('click', () => { currentIdx = (currentIdx + 1) % flatImages.length; updateLightbox(); });
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') lightbox.classList.remove('open');
+  if (e.key === 'ArrowLeft') document.getElementById('lbPrev').click();
+  if (e.key === 'ArrowRight') document.getElementById('lbNext').click();
+});
+
+/* ---- scroll reveal ---- */
+const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting){
+      entry.target.classList.add('in');
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+revealEls.forEach(el => io.observe(el));
+
+/* hero stats always reveal on load */
+window.addEventListener('load', () => {
+  document.querySelector('.stats').classList.add('in');
+});
+
+/* ---- header state + active link ---- */
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+const navLinks = document.querySelectorAll('.nav-links a');
+const sections = ['about','experience','skills','projects','education'].map(id => document.getElementById(id));
+const navIO = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const id = entry.target.id;
+    const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+    if (!link) return;
+    if (entry.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-45% 0px -45% 0px' });
+sections.forEach(s => s && navIO.observe(s));
+
+/* ---- mobile menu ---- */
+const menuBtn = document.getElementById('menuBtn');
+const navLinksEl = document.getElementById('navLinks');
+menuBtn.addEventListener('click', () => {
+  const open = navLinksEl.style.display === 'flex';
+  navLinksEl.style.display = open ? 'none' : 'flex';
+  navLinksEl.style.cssText += open ? '' : 'position:absolute;top:64px;left:0;right:0;background:#0b0d10;flex-direction:column;padding:20px 28px;border-bottom:1px solid rgba(255,255,255,0.08);gap:18px;';
+});
+navLinksEl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  if (window.innerWidth <= 900) navLinksEl.style.display = 'none';
+}));
+</script>
+</body>
+</html>
